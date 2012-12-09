@@ -45,6 +45,14 @@ public class EventExecutor {
     }
     
     /**
+     * Checks if their are no current events in management
+     * @return true if management is empty
+     */
+    public static boolean checkActivity(){
+        return (activeEvents.isEmpty()) && (incomingEvents.isEmpty()) && (idleEvents.isEmpty());
+    }
+    
+    /**
      * Loops through a list containing the new events to be scheduled and synchronizes
      * them into the active events list following a single execution of the current list
      */

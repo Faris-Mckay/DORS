@@ -17,6 +17,7 @@
 package com.dors.task;
 
 import com.dors.ThreadMaster;
+import com.dors.misc.IdleShutdownManager;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -43,10 +44,19 @@ public class TaskController {
      * @throws Exception 
      */
     public static void addTask(Task task) throws Exception{
+        IdleShutdownManager.getSingleton().DORSIdleExecution(true);
         if(task.getDate().before(new Date(System.currentTimeMillis()))){
             throw new DataFormatException();
         }
         incomingTasks.add(task);
+    }
+    
+    /**
+     * Checks if their are no current tasks in management
+     * @return true if management is empty
+     */
+    public static boolean checkActivity(){
+        return (incomingTasks.isEmpty()) && (idleTasks.isEmpty()) && (executoryCycle.isEmpty());
     }
     
     /**
@@ -96,6 +106,7 @@ public class TaskController {
             ThreadMaster.getInstance().assignTask(task);
             it.remove();
         }
+        IdleShutdownManager.getSingleton().DORSIdleExecution(false);
     }
 
 }
