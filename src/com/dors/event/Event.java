@@ -23,7 +23,6 @@ import com.dors.Job;
  * is that the event does the same job, however the Event runs on the same thread as the submission was
  * parsed through, so therefore reducing any complications the user could potentially face using 
  * unsafe threading with DORS application
- * 
  * @author Faris
  */
 public abstract class Event extends Job {

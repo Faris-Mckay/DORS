@@ -17,7 +17,7 @@
 package com.dors.event;
 
 import com.dors.Job;
-import java.util.ArrayList;
+import com.dors.util.JobList;
 import java.util.List;
 
 /**
@@ -26,13 +26,10 @@ import java.util.List;
  */
 public class EventExecutor {
     
-    public static List<Event> activeEvents = new ArrayList();
-    public static List<Event> incomingEvents = new ArrayList();
-    public static List<Event> idleEvents = new ArrayList();
+    public static List<Event> activeEvents = new JobList();
+    public static List<Event> incomingEvents = new JobList();
+    public static List<Event> idleEvents = new JobList();
     
-    /**
-     * Loops through all of the registered Events and executes all of which are due for an execution 
-     */
     public void executeEvents(){
         if(activeEvents.isEmpty())
             return;
@@ -41,21 +38,8 @@ public class EventExecutor {
                 event.finalise();
             }
         }
-        syncIncomingEvents();
     }
     
-    /**
-     * Checks if their are no current events in management
-     * @return true if management is empty
-     */
-    public static boolean checkActivity(){
-        return (activeEvents.isEmpty()) && (incomingEvents.isEmpty()) && (idleEvents.isEmpty());
-    }
-    
-    /**
-     * Loops through a list containing the new events to be scheduled and synchronizes
-     * them into the active events list following a single execution of the current list
-     */
     public void syncIncomingEvents(){
         if(incomingEvents.isEmpty())
             return;

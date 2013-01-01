@@ -62,16 +62,7 @@ public abstract class TimedEvent extends Event {
     }
     
     enum TimeType {
-        
-        MILLISECONDS, 
-        
-        SECONDS, 
-        
-        MINIUTES, 
-        
-        HOURS,
-        
-        DAYS
+        MILLISECONDS, SECONDS, MINIUTES, HOURS ,DAYS
     }
 
 }

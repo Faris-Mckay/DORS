@@ -33,10 +33,6 @@ public class Listener {
     
     private static final Listener instance = new Listener();
     
-    /**
-     * Returns the single active Listener instance
-     * @return 
-     */
     public static Listener getInstance(){
         return instance;
     }

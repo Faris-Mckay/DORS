@@ -30,9 +30,6 @@ public abstract class InterruptableEvent extends Event {
     
     private boolean shouldEnd = false;
     
-    /**
-     * Flags this Event as one which must be haulted before the next execution
-     */
     public void interupt(){
         setShouldEnd(true);
     }

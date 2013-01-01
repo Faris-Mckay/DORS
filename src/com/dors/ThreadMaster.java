@@ -34,30 +34,17 @@ public class ThreadMaster {
     
     private static Map<Task, Integer> taskIDs = new HashMap();
     
-    /**
-     * Returns the single active ThreadMaster instance
-     * @return 
-     */
     public static ThreadMaster getInstance(){
         return instance;
     }
     
     ExecutorService workerThreads = Executors.newCachedThreadPool();
     
-    /**
-     * Pushes a task onto an available worker thread and registers the task 
-     * @param task 
-     */
     public void assignTask(Task task){
         taskIDs.put(task, getNewID());
         workerThreads.submit(task);
     }
     
-    /**
-     * Haults execution of an already active Event 
-     * @param e the event
-     * @throws IllegalEventTypeException when the given event is not interruptable
-     */
     public void interuptEvent(InterruptableEvent e) throws IllegalEventTypeException{
         if(!(e instanceof InterruptableEvent) || (e.shouldEnd())) {
             throw new IllegalEventTypeException();
@@ -66,11 +53,6 @@ public class ThreadMaster {
         taskIDs.remove(getKeyByTask(e));
     }
     
-    /**
-     * Returns the key associated with the given task
-     * @param task is the Job to be identified
-     * @return the key of the Job
-     */
     private Integer getKeyByTask(Job task){
         for(Task tasks : taskIDs.keySet()){
             if(tasks == task){
@@ -79,11 +61,7 @@ public class ThreadMaster {
         }
         return null;
     }
-    
-    /**
-     * Finds an unused key for use with registering new jobs
-     * @returns the unused key
-     */
+
     private Integer getNewID() {
         int key = 0;
         while(taskIDs.containsValue(key)){

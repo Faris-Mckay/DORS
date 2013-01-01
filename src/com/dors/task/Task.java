@@ -39,15 +39,13 @@ public abstract class Task extends Job {
      */
     public abstract int execute();
     
-    /**
-     * Can be called optionally upon the end of
-     * the tasks execution cycle, with EXECUTOR_FINALIZE
-     */
-    public void finalise(){ }
+    public void finalise(){
+        /**
+         * Can be called optionally upon the end of
+         * the tasks execution cycle, with executor finalise
+         */
+    }
     
-    /**
-     * The overall execution phase of given logic from a task
-     */
     @Override
     public void run(){
         if (execute() == EXECUTOR_FINALIZE){

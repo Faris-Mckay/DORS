@@ -17,14 +17,13 @@
 package com.dors.task;
 
 import com.dors.ThreadMaster;
-import com.dors.misc.IdleShutdownManager;
-import java.util.ArrayList;
+import com.dors.util.ConcurrentJobList;
+import com.dors.util.JobList;
+import com.dors.util.JobQueue;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.zip.DataFormatException;
 
 /**
@@ -34,9 +33,9 @@ import java.util.zip.DataFormatException;
 public class TaskController {
     
     // Lists  containing the tasks for all purposes
-    private static List<Task> incomingTasks = new CopyOnWriteArrayList<>();
-    private static List<Task> idleTasks = new ArrayList<>();
-    private static Queue<Task> executoryCycle = new PriorityQueue<>();
+    private static List<Task> incomingTasks = new ConcurrentJobList<>();
+    private static List<Task> idleTasks = new JobList<>();
+    private static Queue<Task> executoryCycle = new JobQueue<>();
     
     /**
      * Submits a task into the incoming task queue
@@ -44,19 +43,10 @@ public class TaskController {
      * @throws Exception 
      */
     public static void addTask(Task task) throws Exception{
-        IdleShutdownManager.getSingleton().DORSIdleExecution(true);
         if(task.getDate().before(new Date(System.currentTimeMillis()))){
             throw new DataFormatException();
         }
         incomingTasks.add(task);
-    }
-    
-    /**
-     * Checks if their are no current tasks in management
-     * @return true if management is empty
-     */
-    public static boolean checkActivity(){
-        return (incomingTasks.isEmpty()) && (idleTasks.isEmpty()) && (executoryCycle.isEmpty());
     }
     
     /**
@@ -106,7 +96,6 @@ public class TaskController {
             ThreadMaster.getInstance().assignTask(task);
             it.remove();
         }
-        IdleShutdownManager.getSingleton().DORSIdleExecution(false);
     }
 
 }

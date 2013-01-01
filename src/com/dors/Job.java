@@ -32,7 +32,7 @@ public abstract class Job implements Runnable{
     private int executions;
     
     /**
-     * Adds one to the count of times Job has been executed
+     * Adds a count to the execution
      */
     public void incrementExecutions(){
         ++executions;

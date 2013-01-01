@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  * is an open source product freely distributed for use in any kind of java application
  * it acts as a logic implementation mechanism that handles all logic processing on a date based
  * scheduler. It can be used as a means of reducing load from your application and code time so 
- * the developers can instead focus on the core of their application rather than the controlled
+ * the developers can instead focus on the core of their programme rather than the controlled
  * execution of data.
  * 
  * @author Faris
