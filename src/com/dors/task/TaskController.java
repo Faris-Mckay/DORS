@@ -97,5 +97,13 @@ public class TaskController {
             it.remove();
         }
     }
+    
+    /**
+     * Checks and returns the conditions for the activity of all tasks
+     * @return 
+     */
+    public static boolean checkActivity(){
+        return executoryCycle.isEmpty() && incomingTasks.isEmpty() && idleTasks.isEmpty();
+    }
 
 }

@@ -46,5 +46,13 @@ public class EventExecutor {
         activeEvents.addAll(incomingEvents);
         incomingEvents.clear();
     }
+    
+    /**
+     * Checks and returns the conditions for the activity of all tasks
+     * @return 
+     */
+    public static boolean checkActivity(){
+        return activeEvents.isEmpty() && incomingEvents.isEmpty() && idleEvents.isEmpty();
+    }
 
 }
