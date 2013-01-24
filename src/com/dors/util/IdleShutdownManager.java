@@ -14,11 +14,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with  DORS API - Java.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.dors.misc;
+package com.dors.util;
 
 import com.dors.DORS;
-import com.dors.event.EventExecutor;
-import com.dors.task.TaskController;
+import com.dors.job.event.EventExecutor;
+import com.dors.job.task.TaskController;
 import java.util.TooManyListenersException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

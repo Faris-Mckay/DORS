@@ -1,5 +1,7 @@
 com.dors
-com.dors.event
-com.dors.event.impl
+com.dors.job
+com.dors.job.event
+com.dors.job.event.ext
+com.dors.job.task
 com.dors.misc
-com.dors.task
+com.dors.util

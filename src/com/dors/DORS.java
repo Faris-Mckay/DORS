@@ -16,7 +16,8 @@
  */
 package com.dors;
 
-import com.dors.task.TaskController;
+import com.dors.job.event.EventExecutor;
+import com.dors.job.task.TaskController;
 import java.util.TooManyListenersException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +28,7 @@ import java.util.logging.Logger;
  * is an open source product freely distributed for use in any kind of java application
  * it acts as a logic implementation mechanism that handles all logic processing on a date based
  * scheduler. It can be used as a means of reducing load from your application and code time so 
- * the developers can instead focus on the core of their programme rather than the controlled
+ * the developers can instead focus on the core of their application rather than the controlled
  * execution of data.
  * 
  * @author Faris
@@ -40,6 +41,17 @@ public class DORS {
      * Begins the application 
      */
     public static void main(String[] args){
+        try {
+            new DORS().start();
+        } catch (TooManyListenersException ex) {
+            Logger.getLogger(DORS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } 
+    
+    /**
+     * Begins the application 
+     */
+    public static void init(){
         try {
             new DORS().start();
         } catch (TooManyListenersException ex) {
@@ -76,9 +88,10 @@ public class DORS {
                 Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
                 Listener.getInstance().listen();
                 while (true) {
-                    TaskController.sortTasks();
+                    TaskController.getSingleton().sortTasks();
+                    EventExecutor.getSingleton().executeEvents();
                     try {
-                        Thread.sleep(50);
+                        Thread.sleep(250);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(DORS.class.getName()).log(Level.SEVERE, null, ex);
                     }

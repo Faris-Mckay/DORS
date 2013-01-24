@@ -16,7 +16,7 @@
  */
 package com.dors.util;
 
-import com.dors.Job;
+import com.dors.job.Job;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**

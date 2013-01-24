@@ -17,7 +17,8 @@
 package com.dors;
 
 
-import com.dors.task.TaskController;
+import com.dors.job.event.EventExecutor;
+import com.dors.job.task.TaskController;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -47,9 +48,10 @@ public class Listener {
                 Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
                 Thread.currentThread().setDaemon(true);
                 while(true){
-                    TaskController.checkNewTasks();
+                    TaskController.getSingleton().checkNewTasks();
+                    EventExecutor.getSingleton().syncIncomingEvents();
                     try {
-                        Thread.sleep(50);
+                        Thread.sleep(250);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(DORS.class.getName()).log(Level.SEVERE, null, ex);
                     }

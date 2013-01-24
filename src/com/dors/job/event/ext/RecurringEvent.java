@@ -14,15 +14,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with  DORS API - Java.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.dors.event.impl;
-
-import com.dors.event.Event;
+package com.dors.job.event.ext;
 
 /**
  *
  * @author Faris
  */
-public abstract class RecurringEvent extends Event {
+public abstract class RecurringEvent extends SimpleEvent {
 
     public RecurringEvent(long frequency, String name){
         super(name);

@@ -14,23 +14,20 @@
  *  You should have received a copy of the GNU General Public License
  *  along with  DORS API - Java.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.dors.task;
+package com.dors.job.task;
 
-import com.dors.Job;
+import com.dors.job.DatedJob;
 import java.util.Date;
 
 /**
  *
  * @author Faris
  */
-public abstract class Task extends Job {
+public abstract class Task extends DatedJob {
     
     public Task(String name, Date date){
-        super(name);
-        this.date = date;
+        super(name, date);
     }
-    
-    private final Date date;
     
     /**
      * The main type of execution, treat this as the main application logic
@@ -51,13 +48,6 @@ public abstract class Task extends Job {
         if (execute() == EXECUTOR_FINALIZE){
             finalise();
         }
-    }
-
-    /**
-     * @return the date
-     */
-    public Date getDate() {
-        return date;
     }
 
 }

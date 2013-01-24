@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with  DORS API - Java.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.dors.task;
+package com.dors.job.task;
 
 import com.dors.ThreadMaster;
 import com.dors.util.ConcurrentJobList;
@@ -32,6 +32,16 @@ import java.util.zip.DataFormatException;
  */
 public class TaskController {
     
+    private static final TaskController instance = new TaskController();
+    
+    /**
+     * Gets the singleton instance
+     * @return
+     */
+    public static TaskController getSingleton(){
+        return instance;
+    }
+    
     // Lists  containing the tasks for all purposes
     private static List<Task> incomingTasks = new ConcurrentJobList<>();
     private static List<Task> idleTasks = new JobList<>();
@@ -42,9 +52,9 @@ public class TaskController {
      * @param task
      * @throws Exception 
      */
-    public static void addTask(Task task) throws Exception{
+    public void addTask(Task task) throws Exception{
         if(task.getDate().before(new Date(System.currentTimeMillis()))){
-            throw new DataFormatException();
+            throw new DataFormatException("Date Specified Has Already Passed!");
         }
         incomingTasks.add(task);
     }
@@ -53,7 +63,7 @@ public class TaskController {
      * Loops through the incoming tasks and puts them into the 
      * executory cycle or the idle task list
      */
-    public static void checkNewTasks(){
+    public void checkNewTasks(){
         if(incomingTasks.isEmpty()) {
             return;
         }
@@ -73,7 +83,7 @@ public class TaskController {
      * Loops through the idle task list and checks if they are
      * due to be inputted into the executoryCycle or delayed
      */
-    public static void sortTasks() {
+    public void sortTasks() {
         Iterator<Task> it = idleTasks.iterator();
         while(it.hasNext()){
             Task task = it.next();
@@ -89,7 +99,7 @@ public class TaskController {
      * Executes all of the scheduled tasks to be executed in
      * the executoryCycle list
      */
-    public static void executeTasks(){
+    public void executeTasks(){
         Iterator<Task> it = executoryCycle.iterator();
         while(it.hasNext()){
             Task task = it.next();
@@ -104,6 +114,16 @@ public class TaskController {
      */
     public static boolean checkActivity(){
         return executoryCycle.isEmpty() && incomingTasks.isEmpty() && idleTasks.isEmpty();
+    }
+    
+    /**
+     * Mainly for testing reasons, compares dates with current time and 
+     * decides whether this time has passed or is yet to be executed.
+     * @param date is the event date
+     * @return true if the date has passed
+     */
+    public static boolean checkTaskDate(Date date){
+        return date.before(new Date(System.currentTimeMillis()));
     }
 
 }

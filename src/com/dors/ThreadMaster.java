@@ -16,9 +16,10 @@
  */
 package com.dors;
 
-import com.dors.event.impl.InterruptableEvent;
+import com.dors.job.Job;
+import com.dors.job.event.ext.InterruptableEvent;
+import com.dors.job.task.Task;
 import com.dors.misc.IllegalEventTypeException;
-import com.dors.task.Task;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;

@@ -16,7 +16,7 @@
  */
 package com.dors.util;
 
-import com.dors.Job;
+import com.dors.job.Job;
 import java.util.PriorityQueue;
 
 /**
@@ -26,4 +26,6 @@ import java.util.PriorityQueue;
 public class JobQueue <E extends Job> extends PriorityQueue<E> {
     
 
+    // ALLOW USAGE OF A QUEUE WITH EXCLUSIVITY TO JOB TYPES ONLY
+    
 }

@@ -14,18 +14,18 @@
  *  You should have received a copy of the GNU General Public License
  *  along with  DORS API - Java.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.dors.event.impl;
+package com.dors.job.event.ext;
 
-import com.dors.event.Event;
+import java.util.Date;
 
 /**
  *
  * @author Faris
  */
-public abstract class TimedEvent extends Event {
+public abstract class TimedEvent extends DatedEvent {
     
-    public TimedEvent(TimeType type, int lengthOfEvent, String name){
-        super(name);
+    public TimedEvent(TimeType type, int lengthOfEvent, String name, Date date){
+        super(name, date);
         setType(type);
         setLengthOfEvent(lengthOfEvent);        
     }

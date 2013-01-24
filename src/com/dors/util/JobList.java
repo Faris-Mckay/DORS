@@ -16,7 +16,7 @@
  */
 package com.dors.util;
 
-import com.dors.Job;
+import com.dors.job.Job;
 import java.util.ArrayList;
 
 /**
@@ -27,5 +27,6 @@ import java.util.ArrayList;
  */
 public class JobList<E extends Job> extends ArrayList<E> {
 
-
+    // ALLOW USAGE OF A LIST WITH EXCLUSIVITY TO JOB TYPES ONLY
+    
 }

@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with  DORS API - Java.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.dors;
+package com.dors.job;
 
 /**
  *

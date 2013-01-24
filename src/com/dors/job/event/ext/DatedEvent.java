@@ -14,21 +14,22 @@
  *  You should have received a copy of the GNU General Public License
  *  along with  DORS API - Java.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.dors.event;
+package com.dors.job.event.ext;
 
-import com.dors.Job;
+import com.dors.job.DatedJob;
+import java.util.Date;
 
 /**
  * An event is the alternative to using task, the benefits of using an event in the tasks stead
- * is that the event does the same job, however the Event runs on the same thread as the submission was
+ * is that the event does the same job, however the DatedEvent runs on the same thread as the submission was
  * parsed through, so therefore reducing any complications the user could potentially face using 
  * unsafe threading with DORS application
  * @author Faris
  */
-public abstract class Event extends Job {
+public abstract class DatedEvent extends DatedJob {
     
-    public Event(String name){
-        super(name);
+    public DatedEvent(String name, Date date){
+        super(name, date);
     }
     
     /**
@@ -40,7 +41,7 @@ public abstract class Event extends Job {
     
     /**
      * Can be called optionally upon the end of
-     * the tasks execution cycle, with executor finalise
+     * the tasks execution cycle, with executor finalize
      */
     public abstract void finalise();
     
